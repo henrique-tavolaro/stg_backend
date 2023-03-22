@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "es2021",
+        "module": "commonjs",
+        "rootDir": "./src",
+        "lib": [
+            "es2020"
+        ],
+        "outDir": "./build",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true, 
+        "skipLibCheck": true 
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        },
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}
