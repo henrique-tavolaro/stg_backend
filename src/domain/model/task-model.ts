@@ -3,6 +3,7 @@ export interface TaskModel {
     previusId?: string;
     fatherId?: string;
     name: string;
+    department: string;
     description?: string;
     assignedTo: string[];
     documentation?: string;

@@ -13,6 +13,10 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    department: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         default: null
