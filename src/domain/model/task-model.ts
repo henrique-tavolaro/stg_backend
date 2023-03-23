@@ -7,6 +7,7 @@ export interface TaskModel {
     assignedTo: string[];
     documentation?: string;
     systems: string[];
+    tasks: string[]
     createdAt: Date;
     deletedAt?: Date;
 }

@@ -27,6 +27,9 @@ const TaskSchema = new mongoose.Schema({
     systems: {
         type: [String]
     },
+    tasks: {
+        type: [String],
+    },
     createdAt: {
         type: Date,
         default: Date.now
