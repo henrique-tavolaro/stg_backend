@@ -9,6 +9,7 @@ export interface TaskModel {
     documentation?: string;
     systems: string[];
     tasks: string[]
+    status: string;
     createdAt: Date;
     deletedAt?: Date;
 }

@@ -11,13 +11,12 @@ export class CreateTaskController implements Controller {
 
     async handle(request: CreateTask.Request): Promise<HttpResponse> {
 
-        console.log('PROPS', request.body);
 
-        const result = await this.repository.createTask(request.body.task)
+        const result = await this.repository.createTask(request.body)
 
         return {
             statusCode: 201,
-            data: "Tarefa criada com sucesso"
+            data: result
         }
     }
 
@@ -25,8 +24,7 @@ export class CreateTaskController implements Controller {
 
 export namespace CreateTask {
     export type Request = {
-        body: {
-            task: CreateTaskProps;
-        }
+        body: CreateTaskProps;
+
     }
 }

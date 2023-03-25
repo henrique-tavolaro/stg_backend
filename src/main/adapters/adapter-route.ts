@@ -4,6 +4,7 @@ import { Controller } from "../../presentation/protocols/controller";
 
 export const adapterRoute = (controller: Controller) => {
     return async (req: Request, res: Response) => {
+        res.set('Content-type', 'application/Json')
 
         const response = await controller.handle(req);
 

@@ -14,7 +14,7 @@ export class DeleteTaskController implements Controller {
         const result = await this.repository.deleteTask(request.body.task)
 
         return {
-            statusCode: 201,
+            statusCode: 200,
             data: "Tarefa excluída com sucesso"
         }
     }

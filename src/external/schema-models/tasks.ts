@@ -34,6 +34,10 @@ const TaskSchema = new mongoose.Schema({
     tasks: {
         type: [String],
     },
+    status: {
+        type: String,
+        default: 'Pendente'
+    },
     createdAt: {
         type: Date,
         default: Date.now

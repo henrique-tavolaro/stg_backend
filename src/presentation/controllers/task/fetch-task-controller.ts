@@ -15,7 +15,7 @@ export class FetchTaskController implements Controller {
         const result = await this.repository.fetchTask(request.body.task)
 
         return {
-            statusCode: 201,
+            statusCode: 200,
             data: result
         }
     }

@@ -1,16 +1,21 @@
+import { isNonNullChain } from "typescript";
 import { TaskModel } from "../../../domain/model/task-model";
 import { NotFoundError } from "../../../main/server/errors/api-errors";
 import { Task } from "../../schema-models/tasks";
-import { CreateTaskProps, DeleteTaskProps, FetchTaskProps, ITaskDatasource, UpdateTaskProps } from "./i-task-datasource";
+import { CreateTaskProps, DeleteTaskProps, FetchTaskProps, FetchTasksByDepartmentProps, ITaskDatasource, UpdateTaskProps } from "./i-task-datasource";
 
 
 export class TaskDatasource implements ITaskDatasource {
+    async fetchTasksByDepartment(props: FetchTasksByDepartmentProps): Promise<TaskModel[]> {
+        return await Task.find().where('department').equals(props.department) as TaskModel[]
 
-    async createTask(props: CreateTaskProps): Promise<void> {
 
+    }
+
+    async createTask(props: CreateTaskProps): Promise<TaskModel> {
         if (!props.fatherId) {
-            await Task.create(props)
-            return
+            const result = await Task.create(props)
+            return result as TaskModel
         }
 
         const result = await Task.create(props)
@@ -21,7 +26,7 @@ export class TaskDatasource implements ITaskDatasource {
             { new: true }
         )
 
-        return
+        return result as TaskModel
     }
 
     async fetchTask(props: FetchTaskProps): Promise<TaskModel> {
@@ -38,8 +43,8 @@ export class TaskDatasource implements ITaskDatasource {
         return await Task.find().where('deletedAt').equals(null) as TaskModel[]
     }
 
-    async updateTask(props: UpdateTaskProps): Promise<TaskModel> {
-        return await Task.findByIdAndUpdate(
+    async updateTask(props: UpdateTaskProps): Promise<void> {
+        await Task.findByIdAndUpdate(
             props.id,
             props,
             {
@@ -47,7 +52,8 @@ export class TaskDatasource implements ITaskDatasource {
                 omitUndefined: true
             }
 
-        ) as TaskModel
+        )
+        return
     }
 
     async deleteTask(props: DeleteTaskProps): Promise<void> {

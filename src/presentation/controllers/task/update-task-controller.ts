@@ -12,13 +12,11 @@ export class UpdateTaskController implements Controller {
 
     async handle(request: UpdateTask.Request): Promise<HttpResponse> {
 
-
-
-        const result = await this.repository.updateTask(request.body.task)
+        await this.repository.updateTask(request.body)
 
         return {
-            statusCode: 201,
-            data: result
+            statusCode: 200,
+            data: 'Tarefa atualizada com sucesso'
         }
     }
 
@@ -26,8 +24,6 @@ export class UpdateTaskController implements Controller {
 
 export namespace UpdateTask {
     export type Request = {
-        body: {
-            task: UpdateTaskProps;
-        }
+        body: UpdateTaskProps
     }
 }
