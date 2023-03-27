@@ -4,6 +4,8 @@ import { Department } from "../../schema-models/department";
 import { CreateDepartmentProps, DeleteDepartmentProps, FetchDepartmentProps, IDepartmentDatasource } from "./i-department-datasource";
 
 export class DepartmentDatasource implements IDepartmentDatasource {
+
+
     async createDepartment(props: CreateDepartmentProps): Promise<DepartmentModel> {
         const { name } = props
 

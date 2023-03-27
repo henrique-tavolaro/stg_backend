@@ -4,12 +4,10 @@ export interface TaskModel {
     fatherId?: string;
     name: string;
     department: string;
-    description?: string;
     assignedTo: string[];
     documentation?: string;
     systems: string[];
     tasks: string[]
-    status: string;
     createdAt: Date;
     deletedAt?: Date;
 }

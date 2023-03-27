@@ -1,5 +1,5 @@
 
-import { FetchTaskProps } from "../../../external/datasource/task/i-task-datasource";
+import { FetchTaskProps, FetchTasksProps } from "../../../external/datasource/task/i-task-datasource";
 import { ITaskRepository } from "../../../infra/repositories/task-repository";
 import { Controller } from "../../protocols/controller";
 import { HttpResponse } from "../../protocols/http";
@@ -12,7 +12,7 @@ export class FetchTasksController implements Controller {
 
     async handle(request: FetchTasks.Request): Promise<HttpResponse> {
 
-        const result = await this.repository.fetchTasks()
+        const result = await this.repository.fetchTasks(request.params)
 
         return {
             statusCode: 200,
@@ -24,5 +24,6 @@ export class FetchTasksController implements Controller {
 
 export namespace FetchTasks {
     export type Request = {
+        params: FetchTasksProps
     }
 }

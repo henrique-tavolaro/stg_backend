@@ -11,7 +11,7 @@ export class DeleteTaskController implements Controller {
 
     async handle(request: DeleteTask.Request): Promise<HttpResponse> {
 
-        const result = await this.repository.deleteTask(request.body.task)
+        const result = await this.repository.deleteTask(request.body)
 
         return {
             statusCode: 200,
@@ -23,8 +23,6 @@ export class DeleteTaskController implements Controller {
 
 export namespace DeleteTask {
     export type Request = {
-        body: {
-            task: DeleteTaskProps;
-        }
+        body: DeleteTaskProps;
     }
 }

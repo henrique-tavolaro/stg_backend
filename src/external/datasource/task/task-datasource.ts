@@ -1,13 +1,31 @@
-import { isNonNullChain } from "typescript";
 import { TaskModel } from "../../../domain/model/task-model";
 import { NotFoundError } from "../../../main/server/errors/api-errors";
 import { Task } from "../../schema-models/tasks";
-import { CreateTaskProps, DeleteTaskProps, FetchTaskProps, FetchTasksByDepartmentProps, ITaskDatasource, UpdateTaskProps } from "./i-task-datasource";
+import { CreateTaskProps, DeleteTaskProps, FetchAllTasksByDepartmentProps, FetchTaskProps, FetchTasksByDepartmentProps, FetchTasksProps, ITaskDatasource, UpdateTaskProps } from "./i-task-datasource";
 
 
 export class TaskDatasource implements ITaskDatasource {
+
+    async fetchAllTasksByDepartment(props: FetchAllTasksByDepartmentProps): Promise<TaskModel[]> {
+
+        return await Task
+            .find()
+            .where('department').equals(props.department) as TaskModel[]
+    }
+
+    async fetchTasks(props: FetchTasksProps): Promise<TaskModel[]> {
+        return await Task
+            .find()
+            .where('previusId').equals(props.previusId)
+            .where('deletedAt').equals(null) as TaskModel[]
+    }
+
     async fetchTasksByDepartment(props: FetchTasksByDepartmentProps): Promise<TaskModel[]> {
-        return await Task.find().where('department').equals(props.department) as TaskModel[]
+        return await Task
+            .find()
+            .where('department').equals(props.department)
+            .where('deletedAt').equals(null)
+            .where('fatherId').equals(null) as TaskModel[]
 
 
     }
@@ -39,9 +57,7 @@ export class TaskDatasource implements ITaskDatasource {
         return task
     }
 
-    async fetchTasks(): Promise<TaskModel[]> {
-        return await Task.find().where('deletedAt').equals(null) as TaskModel[]
-    }
+
 
     async updateTask(props: UpdateTaskProps): Promise<void> {
         await Task.findByIdAndUpdate(

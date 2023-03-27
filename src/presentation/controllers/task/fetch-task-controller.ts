@@ -12,7 +12,7 @@ export class FetchTaskController implements Controller {
 
     async handle(request: FetchTask.Request): Promise<HttpResponse> {
 
-        const result = await this.repository.fetchTask(request.body.task)
+        const result = await this.repository.fetchTask(request.params)
 
         return {
             statusCode: 200,
@@ -24,8 +24,7 @@ export class FetchTaskController implements Controller {
 
 export namespace FetchTask {
     export type Request = {
-        body: {
-            task: FetchTaskProps;
-        }
+        params: FetchTaskProps;
+
     }
 }
