@@ -7,7 +7,9 @@
         "/api/department": {
             "post": {
                 "summary": "Cadastro de área da empresa",
-                "tags": ["Departments"],
+                "tags": [
+                    "Departments"
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -19,7 +21,9 @@
                                         "type": "string"
                                     }
                                 },
-                                "required": ["name"]
+                                "required": [
+                                    "name"
+                                ]
                             },
                             "examples": {
                                 "body": {
@@ -29,7 +33,6 @@
                                 }
                             }
                         }
-                        
                     }
                 },
                 "responses": {
@@ -51,12 +54,108 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "summary": "Deleta área da empresa",
+                "tags": [
+                    "Departments"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "id"
+                                ]
+                            },
+                            "examples": {
+                                "body": {
+                                    "value": {
+                                        "id": "1234567"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/DepartmentModel"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "busca área da empresa",
+                "tags": [
+                    "Departments"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ]
+                            },
+                            "examples": {
+                                "body": {
+                                    "value": {
+                                        "id": "recursos humanos"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/DepartmentModel"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/departments": {
             "get": {
                 "summary": "Busca as áreas da empresa",
-                "tags": ["Departments"],
+                "tags": [
+                    "Departments"
+                ],
                 "responses": {
                     "500": {
                         "description": "Erro interno do servidor"
@@ -68,7 +167,300 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                      "$ref": "#/components/schemas/DepartmentModel"
+                                        "$ref": "#/components/schemas/DepartmentModel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task": {
+            "post": {
+                "summary": "Cria um novo processo",
+                "tags": [
+                    "Tasks"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ]
+                            },
+                            "examples": {
+                                "body": {
+                                    "value": {
+                                        "name": "Folha de pagamento"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/TaskModel"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete um processo",
+                "tags": [
+                    "Tasks"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "id"
+                                ]
+                            },
+                            "examples": {
+                                "body": {
+                                    "value": {
+                                        "id": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "$ref": "Processo deletado com sucesso"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualiza um processo",
+                "tags": [
+                    "Tasks"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "previusId": {
+                                        "type": "string"
+                                    },
+                                    "fatherId": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "documentation": {
+                                        "type": "string"
+                                    },
+                                    "aassignedTo": {
+                                        "type": "array"
+                                    },
+                                    "systems": {
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "id"
+                                ]
+                            },
+                            "examples": {
+                                "body": {
+                                    "value": {
+                                        "id": "123456",
+                                        "documentation": "nova documentação"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "$ref": "Processo deletado com sucesso"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/task/{id}": {
+            "get": {
+                "summary": "Busca o processo pelo id",
+                "tags": [
+                    "Tasks"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/TaskModel"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tasks/{previusId}": {
+            "get": {
+                "summary": "Busca os processos filho do id",
+                "tags": [
+                    "Tasks"
+                ],
+                "parameters": [
+                    {
+                        "name": "previusId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TaskModel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tasksdepartment/{department}": {
+            "get": {
+                "summary": "Busca a arvore pela area",
+                "tags": [
+                    "Tasks"
+                ],
+                "parameters": [
+                    {
+                        "name": "department",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TreeModel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/alltasksdepartment/{department}": {
+            "get": {
+                "summary": "Busca os processos pela area",
+                "tags": [
+                    "Tasks"
+                ],
+                "parameters": [
+                    {
+                        "name": "department",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TaskModel"
+                                    }
                                 }
                             }
                         }
@@ -91,13 +483,72 @@
                     "createdAt": {
                         "type": "string",
                         "format": "date-time"
-                      },
-                      "deletedAt": {
+                    },
+                    "deletedAt": {
                         "type": "string",
                         "format": "date-time"
-                      }
-                     }
-            }
+                    }
+                }
+            },
+            "TaskModel": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "previusId": {
+                        "type": "string"
+                    },
+                    "fatherId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "department": {
+                        "type": "string"
+                    },
+                    "docmuentation": {
+                        "type": "string"
+                    },
+                    "assignedTo": {
+                        "type": "array"
+                    },
+                    "systems": {
+                        "type": "array"
+                    },
+                    "tasks": {
+                        "type": "array"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "TreeModel": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "previusId": {
+                        "type": "string"
+                    },
+                    "tasks": {
+                        "type": "array"
+                    },
+                    "treeList": {
+                        "type": "array"
+                    }
+                }
             }
         }
     }

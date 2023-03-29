@@ -1,0 +1,103 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "STG Backend"
+    },
+    "paths": {
+        "/api/department": {
+            "post": {
+                "summary": "Cadastro de área da empresa",
+                "tags": ["Departments"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["name"]
+                            },
+                            "examples": {
+                                "body": {
+                                    "value": {
+                                        "name": "Financeiro"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Esta área já existe"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/DepartmentModel"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/departments": {
+            "get": {
+                "summary": "Busca as áreas da empresa",
+                "tags": ["Departments"],
+                "responses": {
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DepartmentModel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "DepartmentModel": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "deletedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

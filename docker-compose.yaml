@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3333:3333"
+    command: npm start
+    environment:
+       MONGO_URL: "mongodb+srv://Henrique-Tavolaro:DDZSdGWoEx48V2nE@testcluster.bhuoms8.mongodb.net/STG?retryWrites=true&w=majority"
+       PORT: "3333"
